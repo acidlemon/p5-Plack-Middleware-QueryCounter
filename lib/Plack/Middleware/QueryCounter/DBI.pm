@@ -134,5 +134,16 @@ Additionally, I recommend to remove these header for end-user response.
 
 L<Plack> L<Plack::Builder>
 
+=head1 LICENSE
+
+Copyright (C) Masatoshi Kawazoe (acidlemon).
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=head1 AUTHOR
+
+Masatoshi Kawazoe (acidlemon) E<lt>acidlemon@cpan.orgE<gt>
+
 =cut
 

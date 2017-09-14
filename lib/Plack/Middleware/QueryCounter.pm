@@ -14,15 +14,13 @@ __END__
 
 =head1 NAME
 
-Plack::Middleware::QueryCounter - It's new $module
-
-=head1 SYNOPSIS
-
-    use Plack::Middleware::QueryCounter;
+Plack::Middleware::QueryCounter - query counter per request middleware
 
 =head1 DESCRIPTION
 
-Plack::Middleware::QueryCounter is ...
+Plack::Middleware::QueryCounter is query counter middleware.
+
+Currently available counter is for DBI. see L<Plack::Middleware::QueryCounter::DBI>.
 
 =head1 LICENSE
 
