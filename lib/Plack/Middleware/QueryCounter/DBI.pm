@@ -6,6 +6,14 @@ use utf8;
 use parent 'Plack::Middleware';
 use DBIx::Tracer;
 
+use Plack::Util::Accessor qw/prefix/;
+
+sub prepare_app {
+    my $self = shift;
+
+    $self->{__prefix} = $self->prefix || 'X-QueryCounter-DBI';
+}
+
 sub call {
     my ($self, $env) = @_;
 
@@ -27,10 +35,10 @@ sub call {
     # add header to response
     return Plack::Util::response_cb($res, sub {
         my $res = shift;
-        Plack::Util::header_set($res->[1], 'X-QueryCounter-DBI-Total', $stats->{total});
-        Plack::Util::header_set($res->[1], 'X-QueryCounter-DBI-Read',  $stats->{read});
-        Plack::Util::header_set($res->[1], 'X-QueryCounter-DBI-Write', $stats->{write});
-        Plack::Util::header_set($res->[1], 'X-QueryCounter-DBI-Other', $stats->{other});
+        Plack::Util::header_set($res->[1], $self->{__prefix} . '-Total', $stats->{total});
+        Plack::Util::header_set($res->[1], $self->{__prefix} . '-Read',  $stats->{read});
+        Plack::Util::header_set($res->[1], $self->{__prefix} . '-Write', $stats->{write});
+        Plack::Util::header_set($res->[1], $self->{__prefix} . '-Other', $stats->{other});
     });
 }
 
@@ -55,9 +63,29 @@ sub _callback {
     }
 }
 
-
-
 1;
 
+__END__
 
+=head1 NAME
+
+Plack::Middleware::QueryCounter::DBI - DBI query counter per request middleware
+
+=head1 SYNOPSIS
+
+Enable this middleware using Plack::Builder.
+
+    use Plack::Builder;
+
+    my $app = MyApp->psgi_app;
+
+    builder {
+        enable 'QueryCounter::DBI';
+        $app;
+    };
+
+
+=head1 DESCRIPTION
+
+=cut
 

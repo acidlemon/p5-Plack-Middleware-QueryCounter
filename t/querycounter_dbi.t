@@ -61,9 +61,9 @@ subtest "middleware", sub {
 
         return [200, ['Content-Type' => 'text/plain'], ["Hello Wild"]];
     };
-    $app = Plack::Middleware::QueryCounter::DBI->wrap($app);
+    my $wrap_app = Plack::Middleware::QueryCounter::DBI->wrap($app);
 
-    test_psgi $app, sub {
+    test_psgi $wrap_app, sub {
         my $cb = shift;
         my $res = $cb->(GET "/");
 
@@ -72,8 +72,21 @@ subtest "middleware", sub {
         is $res->header('X-QueryCounter-DBI-Read'), 3, 'read 3 query ok';
         is $res->header('X-QueryCounter-DBI-Write'), 1, 'write 1 query ok';
         is $res->header('X-QueryCounter-DBI-Other'), 1, 'other 1 query ok';
-
     };
+
+    my $wrap_app2 = Plack::Middleware::QueryCounter::DBI->wrap($app, prefix => 'X-Hoge');
+
+    test_psgi $wrap_app2, sub {
+        my $cb = shift;
+        my $res = $cb->(GET "/");
+
+        is $res->code, 200, '200 ok';
+        is $res->header('X-Hoge-Total'), 5, 'total 5 query ok';
+        is $res->header('X-Hoge-Read'), 3, 'read 3 query ok';
+        is $res->header('X-Hoge-Write'), 1, 'write 1 query ok';
+        is $res->header('X-Hoge-Other'), 1, 'other 1 query ok';
+    };
+
 };
 
 

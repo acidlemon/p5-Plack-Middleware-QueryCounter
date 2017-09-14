@@ -55,6 +55,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/acidlemon/p5-Plack-Middleware-QueryCounter/issues"
+      },
+      "homepage" : "https://github.com/acidlemon/p5-Plack-Middleware-QueryCounter",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/acidlemon/p5-Plack-Middleware-QueryCounter.git",
+         "web" : "https://github.com/acidlemon/p5-Plack-Middleware-QueryCounter"
+      }
+   },
    "version" : "0.01",
    "x_serialization_backend" : "JSON::PP version 2.27300_01"
 }
