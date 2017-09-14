@@ -32,10 +32,11 @@ The counted quieries classify read, write or other query.
 
 You'll get following HTTP headers.
 
-X-QueryCounter-DBI-Total: 20
-X-QueryCounter-DBI-Read:  16
-X-QueryCounter-DBI-Write:  4
-X-QueryCounter-DBI-Other:  0
+
+    X-QueryCounter-DBI-Total: 20
+    X-QueryCounter-DBI-Read:  16
+    X-QueryCounter-DBI-Write:  4
+    X-QueryCounter-DBI-Other:  0
 
 Then, you can write to access log using nginx.
 
