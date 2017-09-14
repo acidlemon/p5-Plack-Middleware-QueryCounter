@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "query counter per request middleware",
    "author" : [
       "Masatoshi Kawazoe (acidlemon) <acidlemon@beatsync.net>"
    ],

@@ -64,3 +64,14 @@ Additionally, I recommend to remove these header for end-user response.
 # SEE ALSO
 
 [Plack](https://metacpan.org/pod/Plack) [Plack::Builder](https://metacpan.org/pod/Plack::Builder)
+
+# LICENSE
+
+Copyright (C) Masatoshi Kawazoe (acidlemon).
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+# AUTHOR
+
+Masatoshi Kawazoe (acidlemon) <acidlemon@cpan.org>
