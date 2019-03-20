@@ -47,6 +47,37 @@ insert into foo (hoge_id, fuga_id) values (42, 24);"
     is $stats->{other}, 1, 'other = 1 ok';
 };
 
+# test sql with inital newlines
+subtest "_callback sql_multiline", sub {
+    my $stats = {
+        total => 0,
+        read  => 0,
+        write => 0,
+        other => 0,
+    };
+
+    Plack::Middleware::QueryCounter::DBI::_callback({
+        sql => "
+
+SELECT * FROM table; 
+
+DELETE FROM player; 
+
+/* test.pm:L26 
+*/ 
+
+UPDATE table SET password = 'powawa';\n\
+
+ALTER TABLE hoge ADD COLUMN powawa int;
+
+insert into foo (hoge_id, fuga_id) values (42, 24);"
+    }, $stats);
+
+    is $stats->{total}, 5, 'total count = 5 ok';
+    is $stats->{read}, 1, 'read count = 1 ok';
+    is $stats->{write}, 3, 'write = 3 ok';
+    is $stats->{other}, 1, 'other = 1 ok';
+};
 
 # middleware test
 subtest "middleware", sub {
