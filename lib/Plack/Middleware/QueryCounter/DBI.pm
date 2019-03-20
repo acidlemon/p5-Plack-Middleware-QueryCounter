@@ -45,12 +45,11 @@ sub call {
 sub _callback {
     my ($args, $stats) = @_;
     my $inputs = $args->{sql};
-    $inputs =~ s{/\*(.*)\*/}{}g;
+    $inputs =~ s{/\*(.*)\*/}{}sg;
 
     my @sqls = split /;/, $inputs;
-
     for my $sql (@sqls) {
-        $sql =~ s/^\s*(.*?)\s*$/$1/;
+        $sql =~ s/^\s*(.*?)\s*$/$1/s;
         $stats->{total}++;
 
         if ($sql =~ /^SELECT/i) {
